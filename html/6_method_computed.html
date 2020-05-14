@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <p>{{computedProperty}}</p>
+    <p>{{computedProperty}}</p>
+    <p>{{computedProperty}}</p>
+    <button type="button" onclick="change();">CHANGE!</button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    //Computed : 계산된 속성
+    //해당 값은 캐싱이 된다.
+    //메소드 속성처럼 정의하지만 데이터 속성처럼 사용
+    computed: {
+        computedProperty(){
+            console.log("recompute!");
+            return new Date();
+        }
+    }
+});
+
+//Computed 속성은 Default 로 readonly 속성을 따르므로 Error!
+//Computed 속성의 값을 바꾸고 싶다면 data 와 setter 를 사용해야 한다
+var change = function(){
+    app.computedProperty = new Date();
+}
+
+</script> 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <p>반지름이 {{radius}}cm 인 원의 둘레는 {{circumference(radius)}}cm 이고, 넓이는 {{circumference(radius)}}cm 이다.</p>
+    <button type="button" onclick="change();">CHANGE!</button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: { radius : 10 },
+    //Vue 인스턴스의 Methods 속성
+    methods: {
+        circumference: function(radius){
+            return Math.round(2*Math.PI*radius*100)/100;
+        },
+        circleArea: function(radius){
+            return Math.round(Math.PI*radius*radius*100)/100;
+        }
+    },
+    //Computed : 계산된 속성
+    //메소드 속성처럼 정의하지만 데이터 속성처럼 사용
+    //default 는 읽기전용
+    computed: {
+        computedProperty(){
+            console.log("recompute!");
+            return 
+        }
+    }
+});
+
+//Vue 인스턴스의 data값이 변할 경우 화면 rendering 이 즉시 바뀌게 된다.
+var change = function(){
+    app.radius = 20;
+}
+
+</script> 

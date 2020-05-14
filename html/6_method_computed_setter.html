@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <p>{{time}}</p>
+    <p>{{time}}</p>
+    <p>{{time}}</p>
+    <button type="button" onclick="change();">CHANGE!</button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        time : new Date()
+    },
+    //Computed : 계산된 속성
+    //Computed 속성 값을 바꾸기 위해 setter 사용
+    computed: {
+        timeMethod : {
+            get : function(){
+                return this.time;
+            },
+            set : function(date){
+                this.time = date;
+            }
+        }
+    } 
+});
+
+//setter 에 값 set
+//https://vuejs.org/v2/guide/computed.html#Computed-Setter
+var change = function(){
+    app.timeMethod = new Date();
+}
+
+</script> 

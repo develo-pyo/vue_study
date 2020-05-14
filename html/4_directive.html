@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <!-- html 태그 속성에 v- 접두어가 붙은 속성 -->
+    <!-- interpolation 사용시, 입력된 문자를 그대로 화면에 출력하도록 vue 가 동작 (보안상의 이유로) -->
+
+    <!-- v-html 을 사용하여 html tag를 사용할 수 있다 -->
+    <p v-html='str'></p>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        str: 'this is <strong>v-html</strong> directive example!'
+    }
+});
+</script> 
