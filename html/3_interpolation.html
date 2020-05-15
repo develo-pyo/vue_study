@@ -7,6 +7,7 @@
 <div id="app">
     <!-- interpolation : {{}} -->
     <!-- 1. tag에 영향을 주는 곳에 사용이 불가 -->
+    <h1>{{str}}</h2> <!-- O -->
     <h2 class="{{ str }}">Hello world!</h2> <!-- X interpolation 은 tag에 영향을 주는 곳에 사용이 불가-->
     <h3 {{ str }}>Hello  world!</h3> <!-- X interpolation 은 tag에 영향을 주는 곳에 사용이 불가 -->
     <!-- 2. if문 사용 불가 : 3항연산자 사용 -->
@@ -19,7 +20,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-    str: 'Vue.js'
+        str: 'Vue.js'
     }
 });
 </script>

@@ -1,3 +1,4 @@
+//https://www.youtube.com/watch?v=yihfmJIgnGc&t=254s
 var app = new Vue({
     el: '#app',
     data : {

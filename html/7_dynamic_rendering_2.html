@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <!-- v-if, v-else-if, v-else -->
+    <p>
+        <span>결과 : {{num}}</span>
+    </p>
+    <p>
+        <span v-if='num<3'>3보다 작다</span>
+        <span v-else-if='num>7'>7보다 크다</span>
+        <span v-else>그 외의 경우다</span>
+    </p>
+    <button onclick="rand()">change</button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data : {num : 1}
+});
+
+var rand = function(){
+    app.num = Math.round(Math.random()*10);
+}
+
+</script> 

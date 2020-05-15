@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <!-- v-if 를 사용하여 분기처리 가능 -->
+    <div v-if='isLoginBoxShow'>
+        <p>비로그인 상태</p>
+        <button type="button" onclick="toggle();">로그인</button>
+    </div>
+    <div v-else>
+        <p>로그인 상태</p>
+        <button type="button" onclick="toggle();">로그아웃</button>
+    </div>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data : {isLoginBoxShow : true}
+});
+
+var toggle = function(){
+    app.isLoginBoxShow = !app.isLoginBoxShow;
+}
+
+</script> 
