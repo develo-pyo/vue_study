@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <h1>{{value}}</h1>
+    <!-- v-on 사용 -->
+    <button v-on:click=' setValue("왼쪽") '>클릭</button>
+    <!-- v-on 약어 @ 사용 -->
+    <button @click=' setValue("오른쪽") '>클릭</button>
+
+    <!-- v-on 디렉티브 .수식어 를 사용할 수 있다 -->
+    <!-- @keyUp.enter : enter 키 입력시 함수 호출 -->
+    <!-- 
+        [키보드 관련 수식어]
+        enter tab esc space
+        delete
+        up down left right
+        .키코드 : jsKeyCode 직접 사용
+        ctrl alt shift
+        meta : 윈도우키/맥command 키
+
+        [마우스 관련 수식어]
+        left right : 좌우클릭
+        middle : 휠클릭
+    -->
+    <div>
+        <span>keyUp.enter</span>
+        <input id="input" type="text" @keyUp.enter='setInputValue()'>
+    </div>
+    <div>
+        <!-- .수식어.수식어 와 같이 체이닝 문법 사용이 가능 -->
+        <!-- shift + ctrl + enter 시에도 동작 -->
+        <span>keyUp.shift.enter</span>
+        <input id="input2" type="text" @keyUp.shift.enter='withoutExact()'>
+    </div>
+    <div>
+        <!-- exact : 정확한 수식어 검사 -->
+        <!-- shift + ctrl + enter 시에 동작 X -->
+        <span>keyUp.shift.enter.exact</span>
+        <input id="input3" type="text" @keyUp.shift.enter.exact='withExact()'>
+    </div>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+//이벤트 관리(등록/해제)를 vue.js 가 해주기 때문에
+//.off().click() 과 같이 해제 등록을 직접 해줄 필요가 없다
+const app = new Vue({
+    el: '#app',
+    data : { value: "클릭해주세요" },
+    methods : {
+        setValue : function(str){
+            this.value = str + " 클릭";
+        },
+        setInputValue : function(){
+            this.value = document.getElementById("input").value;
+        },
+        withoutExact : function(){
+            this.value = document.getElementById("input2").value;
+        },
+        withExact : function(){
+            this.value = document.getElementById("input3").value;
+        }
+    }
+});
+</script> 
