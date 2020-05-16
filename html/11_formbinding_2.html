@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<!-- 
+    [v-model 수식어]
+    1 .lazy : onchange 와 비슷하게 사용자 입력이 끝난 이후 이벤트 발생
+    2 .trim
+    3 .number : 문자열을 자동으로 숫자로 변환
+-->
+<div id="app">
+   <h1>{{str + ":" + typeof str}}</h1>          <!-- default:string -->
+   <input type="text" v-model.trim.lazy='str'>  <!-- 공백문자 제거 + 입력 끝난 후 데이터 바인딩-->
+   <h1>{{num + ":" + typeof num}}</h1>          <!-- 10:number -->
+   <input type="number" v-model.number='num'>   <!-- 자료형 number로 변환 -->
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+const app = new Vue({
+    el: '#app',
+    data : { 
+            str: "default",
+            num: 10
+        }
+});
+</script> 

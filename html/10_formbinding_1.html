@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <div>
+        <h1>{{value}}</h1>
+        <!-- v-model : vue 의 data와 양방향 바인딩된다. -->
+        <!-- 사용자의 입력을 받는 즉시(onKeyDown) interpolation {{}} 안의 값이 바뀐다 -->
+        <input type="text" v-model='value'> 
+        <!-- 양방향 바인딩 되어있으므로 버튼 click 시에도 {{}}안의 값이 바뀐다 -->
+        <button @click='setDefault()'>기본값세팅</button>
+    </div>
+
+    ----------------------------------
+    <div>
+    <!-- 
+        v-model 은 form 태그 종류마다 데이터 형태의 차이가 있다 
+        1. v-model 과 text input : 데이터와 value 속성이 서로 바인딩되며 text 형태로 가져오게 된다
+        2. v-model 과 checkbox : 데이터와 checked 속성이 서로 바인딩되며 boolean 형태로 가져오게 된다   !주의!
+        3. v-model 과 multi checkbox  : 같은 데이터에 여러 체크박스가 설정되면 데이터가 체크박스의 value값 배열로 바인딩 된다   !주의!
+    -->
+        <h1>{{single}}</h1> <!-- true/false -->
+        <input type="checkbox" v-model='single' value="one"> single 
+
+        <h1>{{multi}}</h1>  <!-- [ "one", "two", "three" ] -->
+        <input type="checkbox" v-model='multi' value="one"> 1
+        <input type="checkbox" v-model='multi' value="two"> 2
+        <input type="checkbox" v-model='multi' value="three"> 3
+
+        <h1>{{radio}}</h1>
+        <input type="radio" v-model='radio' value="one">1
+        <input type="radio" v-model='radio' value="two">2
+        <input type="radio" v-model='radio' value="three">3
+
+        <h1>{{select}}</h1> <!-- multiselect 가 가능하도록 속성을 지정할 경우 multi check 박스와 동일하게 동작 -->
+        <select v-model='select'>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+
+        <h1>{{textarea}}</h1>
+        <textarea v-model='textarea'></textarea>
+    </div>
+    <button @click='pop()'>button</button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+const app = new Vue({
+    el: '#app',
+    data : { 
+            single: true,   //초기값을 줄 경우 초기값으로 default value가 지정된다
+            multi:["two"],  //초기값을 줄 경우 초기값으로 default value가 지정된다
+            radio:"",
+            textarea:"",
+            select:"A"  //초기값을 줄 경우 초기값으로 default value가 지정된다
+        },
+    methods: {
+        pop : function(){
+            alert(this.select);
+        }
+    }
+});
+</script> 

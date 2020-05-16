@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<div id="app">
+    <!-- v-bind : 태그 속성에 동적인 속성값 사용 -->
+    <li><a v-bind:href='url'>{{url}}</a></li>
+    <!-- v-bind 의 약어는 ':' -->
+    <li><a :href='getUrl("developyo.tistory")'>dev blog</a></li>
+
+    ---------------------------------
+
+    <!-- 디렉티브와 일반속성의 중복 1 -->
+    <!-- 일반속성과 디렉티브로 지정한 속성은 동등한 레벨로 취급된다 -->
+    <!-- 동일한 속성이 중복될 경우 나중에 선언된 속성이 덮어쓰게 되며 아래의 예제를 통해 확인이 가능 -->
+    <li><a v-bind:href='url' href="https://github.com/develo-pyo">dev blog / git</a></li> <!-- github 주소로 링크됨 -->
+    <li><a href="https://github.com/develo-pyo" v-bind:href='url'>git / dev blog</a></li> <!-- 개발블로그로 링크됨 -->
+
+    ---------------------------------
+
+    <!-- 디렉티브와 일반속성의 중복 2 -->
+    <!-- 
+         style, class와 같이 여러 값을 가질 수 있는 속성에선 
+         일반 속성 에 디렉티브로 지정한 속성이 결합되어진다. (일반속성 적용 + 디렉티브 속성 적용)
+         이에 따라 속성이 중복될 경우 일반속성 위에 디렉티브 속성이 덮어쓰여져 디렉티브 속성이 적용될 수 있다
+    -->
+    <p :style='{color:"red"}' style="font-size : 3em;"> 스타일 바인딩 중복</p>
+    <p :style='{color:"blue"}' style="color:red"> 스타일 바인딩</p> <!-- 이 경우 color 속성이 중복되는데, 디렉티브로 지정한 blue 가 적용된다 -->
+    <p :class='"testcls1"' class="testcls2">클래스 바인딩</p>
+    
+    ---------------------------------
+
+    <!-- 배열과 객체를 사용한 속성 지정 -->
+    <p :class='attrNamesArray'>배열 지정</p>    <!-- btn btn-primary btn-block -->
+    <p :class='attrNamesObject'>객체 지정</p>   <!-- attrName attr-name -->
+
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+const app = new Vue({
+    el: '#app',
+    data : { 
+            url: "https://developyo.tistory.com/",
+            attrNamesArray : ["btn", "btn-primary", "btn-block"],   //n개의 속성을 배열을 사용하여 지정할 수 있다. 
+            attrNamesObject : { //n개의 속성을 객체를 사용하여 지정할 수 있으며 true/false 로 사용여부를 선택 할 수 있다.
+                attrName : true,
+                hideAttr : false,
+                'attr-name': true
+            }
+        },
+    methods : {
+        getUrl : function(url){
+            return "https://" + url + ".com/"
+        }
+    }
+});
+</script> 
