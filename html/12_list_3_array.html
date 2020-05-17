@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<!-- 
+    [v-for]
+    배열 : v-for="(item, key) in array"
+    객체 : v-for="(item, key, index) in object"
+
+    [가능하면 배열을 사용할 것]
+    1. 프로퍼티 명(KEY) 순서 제어가 힘들고
+    2. 객체 프로퍼티가 추가된 경우 감지가 어려움
+
+-->
+<div id="app">
+    <ul>
+        <li v-for='(no, i) in arr' v-bind:key='no'> <!-- v-for 디렉티브 사용시 v-bind 는 필수로 사용할것 : 데이터 정확도와 성능향상 -->
+            <button @click='remove(i)'>X</button> {{no}}
+        </li>
+        <li>
+            <button @click='append(1)'>+1</button>
+            <button @click='append(5)'>+5</button>
+            <button @click='append(10)'>+10</button>
+        </li>
+    </ul>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+const app = new Vue({
+    el: '#app',
+    data : {
+        arr : [],
+        cur : 0
+    },
+    methods: {
+        //배열 메소드
+        //push, pop, sort
+        //shift 첫번째 요소 제거
+        //unshift 첫번째 요소 추가
+        //splice 일정 부분요소 치환 및 제거
+        //reverse 순서를 반대로 뒤집을 때
+        append: function(x){
+            for(let i=0; i<x; i++){
+                this.arr.push(++this.cur);
+            }
+        },
+        remove: function(index){
+            this.arr.splice(index, 1);
+        }
+    }
+    
+});
+// [Vue.js Life Cycle]
+// 1. Create 
+// 이벤트와 생명주기 메소드 초기화
+// 메소드 및 데이터 옵션을 주입(바인딩)하고 반응형으로 설정
+// 
+// 2. Mount
+// 템플릿 읽어온 후 문법 적용 및 화면에 렌더링
+// 
+// 3. Update
+// 데이터 속성의 변화를 감지할 경우 화면 다시 렌더링
+// 
+// 4. Destroy
+// 데이터 반응 해제 및 이벤트 삭제하고 인스턴스 소멸
+//
+// [Life Cycle Hook]
+// 각 생명주기 단계마다 수행할 콜백함수 지정이 가능
+// created, mounted, beforeUpdate, updated
+// beforeCreate, beforeMount, beforeDestroy, destroyed 등이 있다
+
+</script> 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<!-- 
+    [v-for]
+    배열 : v-for="(item, key) in array"
+    객체 : v-for="(item, key, index) in object"
+
+    [가능하면 배열을 사용할 것]
+    1. 프로퍼티 명(KEY) 순서 제어가 힘들고
+    2. 객체 프로퍼티가 추가된 경우 감지가 어려움
+
+-->
+<div id="app">
+    <p>
+        <span v-for='(item, key) in arr'>{{item+"/"+key}}<br></span>
+    </p>
+    <p>
+        <span v-for='(item, key, idx) in object'>{{item+"/"+key+"/"+idx}}<br></span>
+    </p>
+    <p>
+        <span v-for='(item, key, idx) in object'>
+            {{item+"/"+key+"/"+idx}}<span v-if="idx != Object.keys(object).length - 1">,</span><br>
+        </span>
+    </p>
+    --------------------------------------
+    <ul>
+        <li v-for='(no, i) in arr2'>{{no}}</li>
+        <li><button @click='append()'>+1</button></li>
+    </ul>
+        
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+const app = new Vue({
+    el: '#app',
+    data : {
+        arr : ["a", "b", "c", "d"],
+        object : {
+            one : 1,
+            two : 2,
+            three : 3
+        },
+        arr2 : [1, 2, 3],
+        last : 3
+    },
+    methods: {
+        append: function(){
+            this.last++;
+            //배열 메소드
+            //push, pop, sort
+            //shift 첫번째 요소 제거
+            //unshift 첫번째 요소 추가
+            //splice 일정 부분요소 치환 및 제거
+            //reverse 순서를 반대로 뒤집을 때
+            this.arr2.push(this.last);
+        }
+    }
+    
+});
+</script> 

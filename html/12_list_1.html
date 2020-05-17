@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<!-- 
+    [v-for]
+    for in 문과 비슷한 반복문
+    v-for="n in 10"
+-->
+<div id="app">
+   <ul v-for='j in 8'>  <!-- 구구단 출력 -->
+       <li v-for='i in 9'>
+           {{j+1}} x {{i}} = {{j*i}}  
+       </li>
+   </ul>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+const app = new Vue({
+    el: '#app'
+});
+</script> 
