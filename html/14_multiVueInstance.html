@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+<body>  
+    <!-- 
+        여러개의 Vue 인스턴스 사용하기 
+        https://www.youtube.com/watch?v=LoxRqagf3k4&list=PLB7CpjPWqHOtYP7P_0Ls9XNed0NLvmkAh&index=11
+        
+    -->
+    <div id="app">
+        {{name}}
+        <button @click="changeText">button</button>
+    </div>
+    <div id="app1">
+        {{name}}
+        <button @click="changeText">button</button>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            name: 'devpyo'
+        },
+        methods: {
+            changeText(){
+                app1.name='devpyo1 updated'; //자신의 인스턴스가 아닌 다른 vue 인스턴스의 데이터를 바꿀 수 있다
+            }
+        }
+    })
+    const app1 = new Vue({
+        el: '#app1',
+        data: {
+            name: 'devpyo1'
+        },
+        methods: {
+            changeText(){
+                app.name='devpyo updated';
+            }
+        }
+    })
+</script> 

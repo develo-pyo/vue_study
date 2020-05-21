@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+</head> 
+
+<body>  
+<!-- 
+    [Vue.js instance Life Cycle]
+    1. Create 
+    이벤트와 생명주기 메소드 초기화
+    메소드 및 데이터 옵션을 주입(바인딩)하고 반응형으로 설정
+
+    2. Mount
+    템플릿 읽어온 후 문법 적용 및 화면에 렌더링
+
+    3. Update
+    데이터 속성의 변화를 감지할 경우 화면 다시 렌더링
+
+    4. Destroy
+    데이터 반응 해제 및 이벤트 삭제하고 인스턴스 소멸
+
+    [Life Cycle Hook]
+    각 생명주기 단계마다 수행할 콜백함수 지정이 가능
+    created, mounted, beforeUpdate, updated
+    beforeCreate, beforeMount, beforeDestroy, destroyed 등이 있다
+
+    *ES6 의 화살표 함수를 사용하면 안된다 : 
+     lifeCycle 내부에선 this 가 Vue instance로 바인딩 되기 때문에 화살표함수 사용시 vue instance 내부의 메소드 및 데이터에 접근 불가
+-->
+    <p>
+        <button onclick="javascript:initVue();">인스턴스 초기화</button>    <!-- 클릭시 vue 인스턴스 생성되며 created 메소드 호출되며 {{no}} 값이 바인딩됨 -->
+        <button onclick="javascript:destroyVue();">인스턴스 제거</button>   <!-- 클릭시 destroy 메소드 호출되며 vue 인스턴스 제거됨 -->
+    </p>
+    <ul id="app" style="background: yellow;">
+        <li v-for='no in lastNo'>{{no}}</li>
+        <li><button @click='append()'>append</button></li> <!-- 클릭시 updated 메소드 호출됨-->
+    </ul>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = null;
+    var initVue = function(){
+        app = new Vue({
+            el : "#app",
+            data : {lastNo : 10},
+            methods : {
+                append: function(){this.lastNo++;}
+            },
+            computed : {
+                dummy : function(){return this.lastNo;}
+            },
+            beforeCreate: function(){
+                console.log("beforeCreate!", this);
+            },
+            created: function(){
+                console.log("created!", this);
+            },
+            beforeMount: function(){
+                console.log("beforeMount!", this);
+            },
+            mounted: function(){
+                console.log("mounted!", this);
+            }, 
+            beforeUpdate: function(){
+                console.log("beforeUpdate!", this);
+            }, 
+            updated: function(){
+                console.log("updated!", this);
+            }, 
+            beforeDestroy: function(){
+                console.log("beforeDestroy!", this);
+            }, 
+            destroyed: function(){
+                console.log("destroyed!", this);
+            }
+        })
+    }
+    var destroyVue = function(){
+        if(app){
+            app.$destroy();
+        }
+    }
+</script> 
