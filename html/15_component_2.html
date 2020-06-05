@@ -14,6 +14,7 @@
     </div>
     <hr><hr>
     <div id="app1">
+        <hello-world></hello-world>
         <test-button></test-button> <!-- 템플릿 사용시 사용자 지정 태그처럼 사용이 가능하다 -->
     </div>
 </body>
@@ -44,6 +45,9 @@
         methods: {
             changeText(){
                 this.name='devpyo updated';
+                // console.log(app);
+                // app.name = 'test1';
+                // #app1.name = 'test1';
             }
         }
     }
@@ -51,13 +55,14 @@
     const app = new Vue({
         el: '#app',
         components: {   //components 속성에 등록하여 지역적으로 사용이 가능
-            'test-button': testButton
+            'test-button': testButton,
         }
     })
     const app1 = new Vue({
         el: '#app1',
         components: {   //components 속성에 등록하여 지역적으로 사용이 가능
-            'test-button': testButton
+            'test-button': testButton,
+            'hello-world': helloWorld
         }
     })
 </script> 
